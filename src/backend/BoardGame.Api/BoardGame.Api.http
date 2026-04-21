@@ -1,1 +1,43 @@
 
+@BoardGame.Api_HostAddress = http://localhost:5187
+@boardGameId = 000000000000000000000000
+
+GET {{BoardGame.Api_HostAddress}}/api/boardgames
+Accept: application/json
+
+###
+
+GET {{BoardGame.Api_HostAddress}}/api/boardgames/{{boardGameId}}
+Accept: application/json
+
+###
+
+POST {{BoardGame.Api_HostAddress}}/api/boardgames
+Content-Type: application/json
+
+{
+  "title": "Catan",
+  "publisher": "Kosmos",
+  "minPlayers": 3,
+  "maxPlayers": 4,
+  "estimatedPlayTime": 90,
+  "category": "Strategy"
+}
+
+###
+
+PUT {{BoardGame.Api_HostAddress}}/api/boardgames/{{boardGameId}}
+Content-Type: application/json
+
+{
+  "title": "Terraforming Mars",
+  "publisher": "FryxGames",
+  "minPlayers": 1,
+  "maxPlayers": 5,
+  "estimatedPlayTime": 120,
+  "category": "Engine Building"
+}
+
+###
+
+DELETE {{BoardGame.Api_HostAddress}}/api/boardgames/{{boardGameId}}

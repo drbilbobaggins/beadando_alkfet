@@ -20,6 +20,7 @@ public class BoardGameService : IBoardGameService
 
     public async Task<BoardGameModel?> GetByIdAsync(string id)
     {
+        ValidateId(id);
         return await _boardGameRepository.GetByIdAsync(id);
     }
 
@@ -43,6 +44,7 @@ public class BoardGameService : IBoardGameService
 
     public async Task<bool> UpdateAsync(string id, UpdateBoardGameRequest request)
     {
+        ValidateId(id);
         ValidateRequest(request.Title, request.Publisher, request.Category, request.MinPlayers, request.MaxPlayers, request.EstimatedPlayTime);
 
         var boardGame = new BoardGameModel
@@ -60,7 +62,16 @@ public class BoardGameService : IBoardGameService
 
     public async Task<bool> DeleteAsync(string id)
     {
+        ValidateId(id);
         return await _boardGameRepository.DeleteAsync(id);
+    }
+
+    private static void ValidateId(string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            throw new ArgumentException("Id must not be empty.");
+        }
     }
 
     private static void ValidateRequest(
