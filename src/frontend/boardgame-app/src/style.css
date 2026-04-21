@@ -112,6 +112,27 @@ body {
   background: #1f5ed6;
 }
 
+.form-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cancel-button {
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 600;
+  color: #1f2933;
+  background: #e5e7eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background: #d1d5db;
+}
+
 .form-message {
   padding: 12px 14px;
   border-radius: 10px;
@@ -167,6 +188,24 @@ body {
 
 .card-actions {
   margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.edit-button {
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background: #4f46e5;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background: #4338ca;
 }
 
 .delete-button {
@@ -198,6 +237,10 @@ body {
   }
 
   .submit-button {
+    width: 100%;
+  }
+
+  .cancel-button {
     width: 100%;
   }
 }

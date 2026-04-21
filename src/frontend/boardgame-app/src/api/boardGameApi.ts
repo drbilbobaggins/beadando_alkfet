@@ -28,6 +28,23 @@ export async function createBoardGame(
   }
 }
 
+export async function updateBoardGame(
+  id: string,
+  boardGame: CreateBoardGameRequest,
+): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/boardgames/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(boardGame),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to update board game. Status: ${response.status}`);
+  }
+}
+
 export async function deleteBoardGame(id: string): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/boardgames/${id}`, {
     method: 'DELETE',
