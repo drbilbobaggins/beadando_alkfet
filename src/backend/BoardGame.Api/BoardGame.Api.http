@@ -1,18 +1,19 @@
+@host = http://localhost:5178
+@boardGameId = 69e755146b69bf706a67cbb6
 
-@BoardGame.Api_HostAddress = http://localhost:5187
-@boardGameId = 000000000000000000000000
-
-GET {{BoardGame.Api_HostAddress}}/api/boardgames
+###
+# 1) GET all
+GET {{host}}/api/boardgames
 Accept: application/json
 
 ###
-
-GET {{BoardGame.Api_HostAddress}}/api/boardgames/{{boardGameId}}
+# 2) GET by id
+GET {{host}}/api/boardgames/{{boardGameId}}
 Accept: application/json
 
 ###
-
-POST {{BoardGame.Api_HostAddress}}/api/boardgames
+# 3) POST create
+POST {{host}}/api/boardgames
 Content-Type: application/json
 
 {
@@ -25,8 +26,8 @@ Content-Type: application/json
 }
 
 ###
-
-PUT {{BoardGame.Api_HostAddress}}/api/boardgames/{{boardGameId}}
+# 4) PUT update
+PUT {{host}}/api/boardgames/{{boardGameId}}
 Content-Type: application/json
 
 {
@@ -39,5 +40,5 @@ Content-Type: application/json
 }
 
 ###
-
-DELETE {{BoardGame.Api_HostAddress}}/api/boardgames/{{boardGameId}}
+# 5) DELETE
+DELETE {{host}}/api/boardgames/{{boardGameId}}
