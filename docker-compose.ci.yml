@@ -1,0 +1,31 @@
+services:
+  mongo:
+    image: mongo:8
+    container_name: boardgame-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    image: ghcr.io/drbilbobaggins/boardgame-backend:latest
+    container_name: boardgame-backend
+    ports:
+      - "5178:8080"
+    environment:
+      MongoDb__ConnectionString: mongodb://mongo:27017
+      MongoDb__DatabaseName: boardgame_db
+      MongoDb__BoardGamesCollectionName: boardgames
+    depends_on:
+      - mongo
+
+  frontend:
+    image: ghcr.io/drbilbobaggins/boardgame-frontend:latest
+    container_name: boardgame-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
