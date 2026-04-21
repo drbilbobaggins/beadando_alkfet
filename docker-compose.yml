@@ -1,0 +1,35 @@
+services:
+  mongo:
+    image: mongo:8
+    container_name: boardgame-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ./src/backend/BoardGame.Api
+      dockerfile: Dockerfile
+    container_name: boardgame-backend
+    ports:
+      - "5178:8080"
+    environment:
+      MongoDb__ConnectionString: mongodb://mongo:27017
+      MongoDb__DatabaseName: boardgame_db
+      MongoDb__BoardGamesCollectionName: boardgames
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./src/frontend/boardgame-app
+      dockerfile: Dockerfile
+    container_name: boardgame-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

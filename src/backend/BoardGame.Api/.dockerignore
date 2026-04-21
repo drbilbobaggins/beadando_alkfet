@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# VS Code / IDE
+.vscode
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile*
+docker-compose*
+
+# Docs
+docs/
+
+# Node (ha véletlen lenne itt)
+node_modules/
+
+# Test files (ha vannak)
+*.http

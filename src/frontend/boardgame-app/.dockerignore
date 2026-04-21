@@ -1,0 +1,29 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Build output
+dist/
+
+# Git
+.git
+.gitignore
+
+# VS Code / IDE
+.vscode
+*.user
+*.suo
+
+# Docs
+docs/
+
+# Docker
+Dockerfile*
+docker-compose*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files (ha lesznek)
+.env
