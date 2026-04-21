@@ -5,10 +5,20 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
-  docker-build:
+  docker-build-and-push:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_BACKEND: ghcr.io/${{ github.repository_owner }}/boardgame-backend
+      IMAGE_FRONTEND: ghcr.io/${{ github.repository_owner }}/boardgame-frontend
 
     steps:
       - name: Checkout repository
@@ -17,18 +27,29 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build backend image
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push backend image
         uses: docker/build-push-action@v6
         with:
           context: ./src/backend/BoardGame.Api
           file: ./src/backend/BoardGame.Api/Dockerfile
-          push: false
-          tags: boardgame-backend:ci
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.IMAGE_BACKEND }}:latest
+            ${{ env.IMAGE_BACKEND }}:${{ github.sha }}
 
-      - name: Build frontend image
+      - name: Build and push frontend image
         uses: docker/build-push-action@v6
         with:
           context: ./src/frontend/boardgame-app
           file: ./src/frontend/boardgame-app/Dockerfile
-          push: false
-          tags: boardgame-frontend:ci
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.IMAGE_FRONTEND }}:latest
+            ${{ env.IMAGE_FRONTEND }}:${{ github.sha }}
