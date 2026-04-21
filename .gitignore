@@ -1,0 +1,27 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Node
+node_modules/
+dist/
+
+# .NET
+bin/
+obj/
+
+# Env files
+.env
+.env.*
+
+# Docker
+*.tar
+
+# Misc
+coverage/
