@@ -1,6 +1,1 @@
-@BoardGame.Api_HostAddress = http://localhost:5178
 
-GET {{BoardGame.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
