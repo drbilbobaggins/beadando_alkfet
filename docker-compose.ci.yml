@@ -1,7 +1,6 @@
 services:
   mongo:
     image: mongo:8
-    container_name: boardgame-mongo
     ports:
       - "27017:27017"
     volumes:
@@ -9,7 +8,6 @@ services:
 
   backend:
     image: ghcr.io/drbilbobaggins/boardgame-backend:latest
-    container_name: boardgame-backend
     ports:
       - "5178:8080"
     environment:
@@ -21,7 +19,6 @@ services:
 
   frontend:
     image: ghcr.io/drbilbobaggins/boardgame-frontend:latest
-    container_name: boardgame-frontend
     ports:
       - "5173:80"
     depends_on:
