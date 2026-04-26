@@ -8,13 +8,17 @@ Thumbs.db
 # Logs
 *.log
 
-# Node
+# Node / Vite
 node_modules/
 dist/
+.npm/
 
 # .NET
 bin/
 obj/
+.nuget/
+.dotnet/
+artifacts/
 
 # Env files
 .env
@@ -23,5 +27,6 @@ obj/
 # Docker
 *.tar
 
-# Misc
+# Test / coverage
 coverage/
+TestResults/
