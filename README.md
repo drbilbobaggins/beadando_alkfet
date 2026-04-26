@@ -1,4 +1,4 @@
-# 🎲 BoardGame Catalog
+# BoardGame Catalog
 
 ## Overview
 
@@ -86,7 +86,7 @@ MongoDB
 
 ## Getting Started
 
-### Option 1 – Run with Docker (recommended)
+### Option 1 – Run with Docker
 
 ```bash
 docker compose up --build
@@ -151,7 +151,7 @@ Optional (for local development):
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint             | Description         |
 | ------ | -------------------- | ------------------- |

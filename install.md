@@ -1,4 +1,4 @@
-# 📦 Installation Guide (INSTALL.md)
+# Installation Guide (INSTALL.md)
 
 ## Goal
 

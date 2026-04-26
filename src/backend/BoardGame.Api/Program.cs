@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// 👇 CORS middleware (IMPORTANT: before MapControllers !)
+// CORS middleware (IMPORTANT: before MapControllers !)
 app.UseCors("FrontendPolicy");
 
 app.MapControllers();
