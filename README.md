@@ -4,6 +4,13 @@
 
 This project is a simple full-stack web application for managing a board game catalog.
 
+It demonstrates:
+
+- frontend–backend communication via REST API
+- MongoDB integration
+- containerized execution with Docker
+- CI pipeline with automated image build and publish
+
 ---
 
 ## Features
@@ -84,9 +91,22 @@ MongoDB
 
 ---
 
+## Prerequisites
+
+### Required (recommended usage)
+
+* Docker Desktop
+
+### Optional (local development only)
+
+* .NET SDK
+* Node.js + npm
+
+---
+
 ## Getting Started
 
-### Option 1 – Run with Docker
+### Option 1 – Run with Docker (recommended)
 
 ```bash
 docker compose up --build
@@ -97,6 +117,12 @@ After startup:
 * Frontend: http://localhost:5173
 * Backend: http://localhost:5178
 * API health check: http://localhost:5178/api/health
+
+This command starts:
+
+- MongoDB
+- Backend
+- Frontend
 
 ---
 
@@ -113,16 +139,44 @@ This will:
 
 ---
 
-### Option 3 – Local development (optional)
+### Option 3 – Local development
 
-#### Backend
+This mode is intended for development in VS Code without Docker Compose.
+
+Important: MongoDB is not started automatically in this mode and must be started manually.
+
+#### Step 1 – Start MongoDB
+
+```bash
+docker run -d -p 27017:27017 --name mongodb mongo:8
+```
+
+If the container already exists:
+
+```bash
+docker start mongodb
+```
+
+MongoDB will be available at:
+
+```
+mongodb://localhost:27017
+```
+
+#### Step 2 – Start backend
 
 ```bash
 cd src/backend/BoardGame.Api
 dotnet run
 ```
 
-#### Frontend
+Backend URL:
+
+```
+http://localhost:5178
+```
+
+#### Step 3 – Start frontend
 
 ```bash
 cd src/frontend/boardgame-app
@@ -130,24 +184,11 @@ npm install
 npm run dev
 ```
 
-#### Database
+Frontend URL:
 
-```bash
-docker run -d -p 27017:27017 --name mongodb mongo
 ```
-
----
-
-## Prerequisites
-
-Required:
-
-* Docker Desktop
-
-Optional (for local development):
-
-* .NET SDK
-* Node.js + npm
+http://localhost:5173
+```
 
 ---
 
@@ -171,8 +212,6 @@ Optional (for local development):
 4. Edit existing entries
 5. Delete entries
 
-All actions are performed via API calls.
-
 ---
 
 ## CI Pipeline
@@ -184,14 +223,34 @@ The project includes a GitHub Actions workflow that:
 
 Published images:
 
-* `ghcr.io/drbilbobaggins/boardgame-backend`
-* `ghcr.io/drbilbobaggins/boardgame-frontend`
+* ghcr.io/drbilbobaggins/boardgame-backend
+* ghcr.io/drbilbobaggins/boardgame-frontend
 
-The CI pipeline runs on:
+---
 
-* push to `main`
-* pull requests
-* manual trigger
+## Troubleshooting
+
+### Backend cannot connect to MongoDB
+
+If you see:
+
+```
+System.TimeoutException (localhost:27017)
+```
+
+MongoDB is not running.
+
+Start it:
+
+```bash
+docker start mongodb
+```
+
+or create it:
+
+```bash
+docker run -d -p 27017:27017 --name mongodb mongo:8
+```
 
 ---
 
